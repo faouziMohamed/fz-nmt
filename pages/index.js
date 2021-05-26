@@ -19,6 +19,9 @@ export default function Home({ langs }) {
     <div className={`${styles.app} ${styles.container}`} id="app">
       <PageDescription />
       <Header />
+      <div className={styles.under_construction}>
+        <p>Web site is under construction</p>
+      </div>
       <div className={`${styles.root}`}>
         <main className={`${styles.main}`}>
           <Row1Body langs={langs} />
