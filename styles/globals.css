@@ -1,16 +1,28 @@
 html,
 body {
+  width: 100%;
+  min-width: 360x;
+  height: 100%;
   padding: 0;
   margin: 0;
+  overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
-  color: inherit;
+  color: rgb(20, 55, 61);
   text-decoration: none;
+}
+
+a:hover {
+  text-decoration: 2px underline;
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(177, 177, 177, 0.508) rgba(28, 29, 29, 0.953);
 }
