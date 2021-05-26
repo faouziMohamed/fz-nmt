@@ -33,10 +33,7 @@ function PageDescription() {
   return (
     <Head>
       <title>Fz Machine Translator</title>
-      <meta
-        name="description"
-        content="A web page for machine English - French translation"
-      />
+      <meta name="description" content="Web app for machine translation" />
       <link rel="icon" href="/favicon.png" />
     </Head>
   );
