@@ -1,34 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+  <img 
+    src="public/images/fz-nmt.png" 
+    alt="fz-nmt icon" 
+    width="300" 
+    height="300" 
+  />
+</p>
+
+<h1 align="center">
+  FZ Translator<br>
+
+  <p align='center'>
+  <a href="https://www.codacy.com/gh/faouziMohamed/fz-nmt/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=faouziMohamed/fz-nmt&amp;utm_campaign=Badge_Grade">
+    <img src='https://app.codacy.com/project/badge/Grade/f26d2cdd3cc24f2ca6262aaa0a064417' alt='Codacy Badge' />
+  </a>
+  <a href="LICENSE">
+    <img alt="GitHub" src="https://img.shields.io/github/license/faouzimohamed/fz-nmt?color=23015f">
+  </a> 
+  <a href="https://fz-nmt.vercel.app/">
+    <img alt="GitHub deployments" src="https://img.shields.io/github/deployments/faouzimohamed/fz-nmt/production?color=%23062&label=deployement">
+  </a> 
+ </p>
+</h1>
+
+<p align='right'>
+  <a href="https://nextjs.org/" alt='GO to NextJs website'>
+    <img src='https://img.shields.io/badge/NextJs%20App-0655a0.svg?&style=for-the-badge&logo=react' alt='NextJs App' />
+  </a>
+</p>
+
+:parasol_on_ground: Live Version https://fz-nmt.vercel.app/
 
 ## Getting Started
 
-First, run the development server:
+To run the project locally you'll need to have [**nodeJs**](https://nodejs.org/en/download/) > 10 installed in your machine.
+
+First clone this repo :
 
 ```bash
-npm run dev
+# ssh-url
+git clone git@github.com:faouziMohamed/fz-nmt.git
+# Or the HTTPS url
+git clone https://github.com/faouziMohamed/fz-nmt.git
+
+cd fz-nmt
+```
+
+You'll need to install dependencies:
+
+```bash
+yarn install
 # or
+npm install
+```
+
+Then, run the development server:
+
+```bash
 yarn dev
+# or
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Contribution
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+To report issue or make a feature request please refer to this link [fz-nmt/issues](https://github.com/faouziMohamed/fz-nmt/issues)
+To submit a pull request please refer to this link [fz-nmt/pulls](https://github.com/faouziMohamed/fz-nmt/pulls)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Licence
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is under [MIT license](LICENSE) copyright 2021
