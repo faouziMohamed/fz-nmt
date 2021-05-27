@@ -20,7 +20,7 @@ export default function Home({ langs }) {
       <PageDescription />
       <Header />
       <div className={styles.under_construction}>
-        <p>Web site is under construction</p>
+        <p className={styles.uc_message}>Website under construction</p>
       </div>
       <div className={`${styles.root}`}>
         <main className={`${styles.main}`}>
@@ -75,7 +75,7 @@ function IOTranslation({ langs }) {
             />
             <InputTextArea
               className={data.className}
-              readOnly={data.label.toLowerCase() == "target"}
+              readOnly={data.label.toLowerCase() === "target"}
             />
           </div>
         ))}

@@ -131,8 +131,8 @@
   padding: 5px 5px;
   gap: 10px;
   border-radius: 3px;
-  /* background: rgb(255, 90, 14); */
 }
+
 .io_wrapper {
   display: flex;
   flex-direction: column;
@@ -176,7 +176,7 @@
   padding: 5px;
   text-align: center;
   color: rgb(2, 0, 0);
-  box-shadow: inset 0px 1px 2px 1px rgb(19, 26, 54);
+  box-shadow: inset 0 1px 2px 1px rgb(19, 26, 54);
 }
 
 .under_construction {
@@ -194,4 +194,29 @@
     rgb(253, 100, 100) 90%
   );
   color: rgb(0, 32, 41);
+}
+
+.uc_message {
+  /* text-align: center; */
+}
+
+.uc_message::before {
+  content: "\e037";
+  color: rgb(28, 28, 18);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Font Awesome 5 Pro";
+  padding: 6px 5px;
+  animation: slidein 2s ease-in-out alternate both infinite;
+}
+
+@keyframes slidein {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(-0.8);
+  }
 }
