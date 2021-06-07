@@ -1,11 +1,10 @@
-@import url("https://pro.fontawesome.com/releases/v5.15.2/css/all.css");
 html,
 body {
   width: 100%;
   min-width: 360px;
   height: 100%;
-  padding: 0;
   margin: 0;
+  padding: 0;
   overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -16,7 +15,8 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+a:hover,
+a:focus {
   text-decoration: 2px underline;
 }
 
@@ -25,5 +25,6 @@ a:hover {
   margin: 0;
   padding: 0;
   scrollbar-width: thin;
-  scrollbar-color: rgba(177, 177, 177, 0.508) rgba(28, 29, 29, 0.953);
+  scrollbar-color: rgba(177, 177, 177, 0.508) rgba(28, 29, 29, 0.953)
+    rgba(28, 29, 29, 0.953);
 }

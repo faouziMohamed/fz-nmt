@@ -18,7 +18,7 @@
     "upg": "yarn upgrade --latest"
   },
   "dependencies": {
-    "@theme-ui/presets": "^0.9.1",
+    "@material-ui/core": "^4.11.4",
     "date-fns": "^2.21.1",
     "gray-matter": "^4.0.2",
     "html-react-parser": "^1.2.6",
@@ -29,6 +29,7 @@
     "next-compose-plugins": "^2.2.1",
     "next-connect": "^0.10.1",
     "next-optimized-images": "^2.6.2",
+    "prop-types": "latest",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "theme-ui": "^0.9.1"
@@ -51,15 +52,14 @@
     "stylelint-a11y": "^1.2.3",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-rational-order": "^0.1.2",
-    "stylelint-config-recommended": "^5.0.0",
     "stylelint-config-standard": "^22.0.0",
+    "stylelint-group-selectors": "^1.0.8",
     "stylelint-order": "^4.1.0",
-    "stylelint-prettier": "^1.2.0",
-    "stylelint-use-logical": "^1.1.0"
+    "stylelint-prettier": "^1.2.0"
   },
   "lint-staged": {
     "./**/*.{js,jsx}": "eslint --cache --fix",
-    "./**/*.css": "stylelint --fix",
-    "./**/*.{js,jsx,json,md,html,css}": "prettier --write"
+    "./styles/*.css": "stylelint --fix",
+    "./**/*.{js,jsx,json,md,css}": "prettier --write"
   }
 }

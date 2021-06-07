@@ -1,7 +1,5 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Layout from '../components/Layout';
+import styles from '../styles/Home.module.css';
 
 export async function getServerSideProps() {
   const SITE_URL = process.env.SITE_URL_BASE;
@@ -15,48 +13,32 @@ export async function getServerSideProps() {
 }
 
 export default function Home({ langs }) {
+  const pageMetadata = {
+    title: `Fz Machine Translator`,
+    description: 'Web app for machine translation',
+  };
   return (
-    <div className={`${styles.app} ${styles.container}`} id="app">
-      <PageDescription />
-      <Header />
-      <div className={styles.under_construction}>
-        <p className={styles.uc_message}>Website under construction</p>
-      </div>
-      <div className={`${styles.root}`}>
-        <main className={`${styles.main}`}>
-          <Row1Body langs={langs} />
-        </main>
-        <Footer />
-      </div>
-    </div>
-  );
-}
-
-function PageDescription() {
-  return (
-    <Head>
-      <title>Fz Machine Translator</title>
-      <meta name="description" content="Web app for machine translation" />
-      <link rel="icon" href="/favicon.png" />
-    </Head>
+    <Layout pageMetadata={pageMetadata} home>
+      <Row1Body langs={langs} />
+    </Layout>
   );
 }
 
 function Row1Body({ langs }) {
   return (
     <section className={styles.row1}>
-      <PageTitle />
+      <HomePageTitle />
       <IOTranslation langs={langs} />
     </section>
   );
 }
 
-function PageTitle() {
+export function HomePageTitle() {
   return (
     <header>
       <h1 className={styles.title}>
-        Welcome to <span className={styles.title_machine}>Fz Machine</span>
-        <span className={styles.title_translator}>Translator</span>
+        Welcome to <span className={styles.title_sub0}>Fz Machine</span>
+        <span className={styles.title_sub1}>Translator</span>
       </h1>
     </header>
   );
@@ -75,7 +57,7 @@ function IOTranslation({ langs }) {
             />
             <InputTextArea
               className={data.className}
-              readOnly={data.label.toLowerCase() === "target"}
+              readOnly={data.label.toLowerCase() === 'target'}
             />
           </div>
         ))}
@@ -86,15 +68,15 @@ function IOTranslation({ langs }) {
 
 function InputTextArea({ readOnly, className }) {
   return (
-    <textarea className={className} rows="1" readOnly={readOnly}></textarea>
+    <textarea className={className} rows='1' readOnly={readOnly}></textarea>
   );
 }
 
 function LanguageSelection({ label, languages, name }) {
   return (
     <div className={styles.selection_lang}>
-      <label htmlFor="translation">{label}</label>
-      <select name={name} id="" className={styles.select}>
+      <label htmlFor='translation'>{label}</label>
+      <select name={name} id='' className={styles.select}>
         {languages.map((lang, index) => (
           <option value={index} key={index}>
             {lang}

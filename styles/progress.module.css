@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+
+.modal_container {
+  position: fixed;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(1, 17, 11, 0.741);
+}
+
+.modal {
+  position: relative;
+  display: block;
+  width: 90%;
+  max-width: 600px;
+  height: 70%;
+  max-height: 600px;
+  border-radius: 5px;
+  background-color: #232931;
+  box-shadow: 2px 5px 20px rgba(119, 119, 119, 0.5);
+}
+
+.modal_title {
+  padding: 10px 0 0 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.close_btn_container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px 5px 0 0;
+  background-color: rgb(20, 51, 61);
+}
+
+.close_btn {
+  display: flex;
+  align-items: center;
+  border: none;
+  color: rgb(32, 161, 170);
+  font-size: 1.3em;
+  background-color: inherit;
+  cursor: pointer;
+}
+
+.close_btn:hover,
+.close_btn:focus {
+  color: rgb(247, 39, 78);
+}
+
+.rightbox_holder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.rightbox_container {
+  position: relative;
+  display: flex;
+  width: 70%;
+  margin: 0;
+  overflow-y: auto;
+  font-family: 'PT Sans', sans-serif;
+}
+
+.rightbox {
+  display: inline-block;
+  margin: 2.5em 0 0;
+}
+
+.rightbox_item {
+  position: relative;
+  min-height: 50px;
+  margin-inline-start: 5em;
+  padding: 0 0 50px 30px;
+  border-left: 1px dashed #fff;
+  list-style: none;
+}
+
+.rightbox_item:last-child {
+  border-left: 0;
+}
+
+.rightbox_item::before {
+  position: absolute;
+  top: -5px;
+  left: -18px;
+  width: 20px;
+  height: 20px;
+  border: 8px solid rgba(255, 255, 255, 1);
+  border-radius: 500%;
+  background: #50d890;
+  transition: all 500ms ease-in-out;
+  content: ' ';
+}
+
+.rightbox_item:hover::before,
+.rightbox_item:focus::before {
+  border-color: #232931;
+  transition: all 1000ms ease-in-out;
+}
+
+.timestamp {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  color: #50d890;
+  font-size: 12px;
+}
+
+.item_title {
+  color: #fff;
+}
