@@ -1,9 +1,9 @@
 <p align="center">
-  <img 
-    src="public/images/fz-nmt.png" 
+   <img 
+    src="public/images/fzt-official-2.png" 
     alt="fz-nmt icon" 
     width="300" 
-    height="300" 
+    height="200" 
   />
 </p>
 
