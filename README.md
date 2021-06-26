@@ -14,9 +14,9 @@
   <a href="https://www.codacy.com/gh/faouziMohamed/fz-nmt/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=faouziMohamed/fz-nmt&amp;utm_campaign=Badge_Grade">
     <img src='https://app.codacy.com/project/badge/Grade/f26d2cdd3cc24f2ca6262aaa0a064417' alt='Codacy Badge' />
   </a>
-  <a href="LICENSE">
+ <!-- <a href="LICENSE">
     <img alt="GitHub" src="https://img.shields.io/github/license/faouzimohamed/fz-nmt?color=23015f">
-  </a> 
+  </a> -->
   <a href="https://fz-nmt.vercel.app/">
     <img alt="GitHub deployments" src="https://img.shields.io/github/deployments/faouzimohamed/fz-nmt/production?color=%23062&label=deployement">
   </a> 
