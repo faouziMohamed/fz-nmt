@@ -1,30 +1,29 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import css from '../styles/progress.module.css';
+import { useModalStyle } from '../src/theme';
 
 export function IncludeIf({ condition, children }) {
   return condition ? children : null;
 }
 
 export function Modal({ children, show, handleClose, modalTitle = '' }) {
-  const showHideModal = show ? '' : css.hidden;
-  useEffect(() => {
-    document.querySelector(`.${css.modal_container}`).focus();
-  });
+  const classes = useModalStyle();
+  const showHideModal = show ? '' : classes.hidden;
+
   return (
     <React.Fragment>
       <div
-        className={`${css.modal_container} ${showHideModal}`}
+        className={`${showHideModal} ${classes.modal_container}`}
         aria-modal={true}
         aria-hidden={true}
         role={'dialog'}>
-        <section className={css.modal}>
-          <div className={`${css.close_btn_container}`}>
-            <button className={`${css.close_btn}`} onClick={handleClose}>
+        <section className={classes.modal}>
+          <div className={classes.close_btn_container}>
+            <button className={classes.close_btn} onClick={handleClose}>
               <i className={`fad fa-times-circle`}></i>
             </button>
           </div>
-          <h2 className={css.modal_title}>{modalTitle}</h2>
+          <h2 className={classes.modal_title}>{modalTitle}</h2>
           <div>{children}</div>
         </section>
       </div>

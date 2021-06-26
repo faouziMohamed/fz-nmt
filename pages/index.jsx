@@ -1,7 +1,19 @@
-import Layout from '../components/Layout';
-import styles from '../styles/Home.module.css';
+import {
+  FormControl,
+  FormLabel,
+  MenuItem,
+  Select,
+  useMediaQuery,
+} from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import KeyboardIcon from '@material-ui/icons/Keyboard';
+import React from 'react';
 
-export async function getServerSideProps() {
+import Layout from '../components/Layout';
+import { IncludeIf } from '../components/utils';
+import theme, { useHomeStyle, useIconStyle } from '../src/theme';
+
+export async function getStaticProps() {
   const SITE_URL = process.env.SITE_URL_BASE;
   const response = await fetch(`${SITE_URL}/api/lang`);
   let { data } = await response.json();
@@ -19,70 +31,128 @@ export default function Home({ langs }) {
   };
   return (
     <Layout pageMetadata={pageMetadata} home>
-      <Row1Body langs={langs} />
+      <HomeBody langs={langs} />
     </Layout>
   );
 }
 
-function Row1Body({ langs }) {
+function HomeBody({ langs }) {
+  const classes = useHomeStyle();
+
+  const match = useMediaQuery('(max-width:956px)');
+  const justifyContent = !match ? classes.justifyCenter : '';
   return (
-    <section className={styles.row1}>
-      <HomePageTitle />
-      <IOTranslation langs={langs} />
+    <section className={`${classes.main_section} ${justifyContent}`}>
+      {/* <HomePageTitle /> */}
+      <Translation langs={langs} />
     </section>
   );
 }
 
 export function HomePageTitle() {
+  const classes = useHomeStyle();
   return (
     <header>
-      <h1 className={styles.title}>
-        Welcome to <span className={styles.title_sub0}>Fz Machine</span>
-        <span className={styles.title_sub1}>Translator</span>
+      <h1 className={classes.title}>
+        <span className={classes.title_sub0}>Fz </span>
+        <span className={classes.title_sub1}>Translator</span>
       </h1>
     </header>
   );
 }
 
-function IOTranslation({ langs }) {
+function Translation({ langs }) {
+  const classes = useHomeStyle(theme);
+
   return (
-    <section className={styles.translation}>
-      <div className={styles.source_target_wrapper}>
-        {langs.map((data, index) => (
-          <div className={styles.io_wrapper} key={index}>
-            <LanguageSelection
-              label={data.label}
-              languages={data.languages}
-              name={data.name}
+    <section className={classes.translation}>
+      {langs.map((data) => (
+        <div className={classes.translation_bloc} key={data.id}>
+          <IncludeIf condition={data.id === 'src'}>
+            <KeyboardIcon
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                right: '0.2em',
+                color: '#888',
+              }}
             />
-            <InputTextArea
-              className={data.className}
-              readOnly={data.label.toLowerCase() === 'target'}
-            />
-          </div>
-        ))}
-      </div>
+          </IncludeIf>
+          <LanguageSelection data={data} />
+          <InputTextArea
+            className={`${classes.textAreaField} ${
+              data.id === 'tar' ? classes.tr_output : ''
+            }`}
+            readOnly={data.id !== 'src'}
+          />
+        </div>
+      ))}
     </section>
   );
 }
 
-function InputTextArea({ readOnly, className }) {
+function InputTextArea({ className, readOnly = false }) {
+  const inputArea = !readOnly ? 'input-textarea' : '';
+  React.useEffect(() => {
+    if (!readOnly) {
+      document.querySelector(`.${inputArea}`).focus();
+    }
+  }, [readOnly, inputArea]);
   return (
-    <textarea className={className} rows='1' readOnly={readOnly}></textarea>
+    <textarea
+      className={`${className} ${inputArea}`}
+      rows='1'
+      readOnly={readOnly}
+      placeholder={!readOnly ? 'Type to translate' : null}
+      aria-label='Source text'
+    />
   );
 }
+function LanguageSelection({ data, name }) {
+  const classes = useHomeStyle();
+  const [lang, setLang] = React.useState(0);
+  const handleChange = (events) => {
+    setLang(events.target.value);
+  };
 
-function LanguageSelection({ label, languages, name }) {
+  const menuProps = {
+    anchorOrigin: {
+      vertical: 'bottom',
+      horizontal: 'left',
+    },
+    transformOrigin: {
+      vertical: 'top',
+      horizontal: 'left',
+    },
+    getContentAnchorEl: null,
+  };
+  const icon = useIconStyle();
+  const iconComponent = (props) => {
+    return (
+      <ExpandMoreIcon className={`${props.className} ${icon.expandMore}`} />
+    );
+  };
   return (
-    <div className={styles.selection_lang}>
-      <label htmlFor='translation'>{label}</label>
-      <select name={name} id='' className={styles.select}>
-        {languages.map((lang, index) => (
-          <option value={index} key={index}>
+    <FormControl classes={{ root: classes.root_formControl }}>
+      <FormLabel classes={{ root: classes.root_formLabel }}>
+        Translate {data.id === 'src' ? 'From' : 'Into'}
+      </FormLabel>
+      <Select
+        name={name}
+        value={lang}
+        MenuProps={menuProps}
+        onChange={handleChange}
+        style={{
+          fontWeight: 'bold',
+        }}
+        IconComponent={iconComponent}
+        disableUnderline>
+        {data.languages.map((lang, index) => (
+          <MenuItem value={index} key={index}>
             {lang}
-          </option>
+          </MenuItem>
         ))}
-      </select>
-    </div>
+      </Select>
+    </FormControl>
   );
 }

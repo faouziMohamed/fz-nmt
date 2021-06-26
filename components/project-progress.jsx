@@ -1,21 +1,29 @@
+import { Button } from '@material-ui/core';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import React, { useState } from 'react';
 
-import styles from '../styles/Home.module.css';
-import css from '../styles/progress.module.css';
+import theme, {
+  useBoxStyle,
+  useButtonProgress,
+  useHeaderMsgStyle,
+} from '../src/theme';
 import { Modal } from './utils';
 
 export function Important({ title, message }) {
   const [state, setState] = useState(false);
+  const classes = useHeaderMsgStyle();
+  const btnCls = useButtonProgress(theme);
 
   return (
     <React.Fragment>
-      <div className={styles.under_construction}>
-        <p className={styles.under_construction_msg}>{message}</p>
-        <button
-          className={styles.show_progress}
+      <div className={classes.under_construction}>
+        <p className={classes.under_construction_msg}>{message}</p>
+        <Button
+          classes={{ root: btnCls.root, label: btnCls.label }}
           onClick={() => setState(!state)}>
           Show progress
-        </button>
+          <MoreHorizIcon />
+        </Button>
       </div>
 
       <Modal
@@ -27,44 +35,37 @@ export function Important({ title, message }) {
     </React.Fragment>
   );
 }
-export function DashTimeLine() {
-  return (
-    // <div className={`${css.modal_container}`}>
-    <RightBox />
-    // </div>
-  );
-}
 
-function RightBox() {
+function DashTimeLine() {
   const data = [
     {
-      date: `3rd May 2020`,
+      date: `26rd June 2021`,
       time: `7: 00 PM`,
-      title: `Chris Serrano posted a photo on your wall.`,
+      title: `Update website layout and design.`,
     },
     {
-      date: `19th May 2020`,
+      date: `5th June 2021`,
       time: `3: 00 PM`,
-      title: `Mia Redwood commented on your last post.`,
+      title: `Created website layout.`,
     },
     {
-      date: `17st June 2020`,
+      date: `1st June 2021`,
       time: `7: 00 PM`,
-      title: `Lucas McAlister just send you a message.`,
+      title: `Created Deep learning model for translation.`,
     },
   ];
-
+  const classes = useBoxStyle();
   return (
-    <div className={css.rightbox_holder}>
-      <div className={css.rightbox_container}>
-        <ul className={css.rightbox}>
+    <div className={classes.rightbox_holder}>
+      <div className={classes.rightbox_container}>
+        <ul className={classes.rightbox}>
           {data.map((item, index) => (
-            <li className={css.rightbox_item} key={index}>
-              <time className={css.timestamp}>
-                <span className={css.date}>{item.date}</span>
-                <span className={css.time}>{item.time}</span>
+            <li className={classes.rightbox_item} key={index}>
+              <time className={classes.timestamp}>
+                <span className={classes.date}>{item.date}</span>
+                <span className={classes.time}>{item.time}</span>
               </time>
-              <div className={css.item_title}>{item.title}</div>
+              <div className={classes.item_title}>{item.title}</div>
             </li>
           ))}
         </ul>
