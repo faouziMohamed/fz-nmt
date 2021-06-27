@@ -5,7 +5,7 @@ import { useLayoutStyle } from '../src/theme';
 import Header from './Header';
 
 export default function Layout({ children, pageMetadata, home }) {
-  const classes = useLayoutStyle();
+  const classes = useLayoutStyle()();
   return (
     <React.Fragment>
       <React.StrictMode>

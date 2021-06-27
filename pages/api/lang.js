@@ -14,8 +14,5 @@ const ioData = [
     languages: ['French', 'English'],
   },
 ];
-const handler = nc().get((req, res) => {
-  return res.json({ data: ioData });
-});
 
-export default handler;
+export default nc().get((req, res) => res.status(200).json({ data: ioData }));

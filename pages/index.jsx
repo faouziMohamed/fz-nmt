@@ -8,36 +8,36 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import KeyboardIcon from '@material-ui/icons/Keyboard';
 import React from 'react';
+import useSwr from 'swr';
 
 import Layout from '../components/Layout';
 import { IncludeIf } from '../components/utils';
 import theme, { useHomeStyle, useIconStyle } from '../src/theme';
 
-export async function getStaticProps() {
-  const SITE_URL = process.env.SITE_URL_BASE;
-  const response = await fetch(`${SITE_URL}/api/lang`);
-  let { data } = await response.json();
-  return {
-    props: {
-      langs: data,
-    },
-  };
-}
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export default function Home({ langs }) {
+export default function Home() {
+  const { data, error } = useSwr('/api/lang', fetcher);
+  if (error) {
+    return <div>Failed to load Lang data! Refresh the page to retry</div>;
+  }
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+  const { data: langsData } = data;
   const pageMetadata = {
     title: `Fz Machine Translator`,
     description: 'Web app for machine translation',
   };
   return (
     <Layout pageMetadata={pageMetadata} home>
-      <HomeBody langs={langs} />
+      <HomeBody langs={langsData} />
     </Layout>
   );
 }
 
 function HomeBody({ langs }) {
-  const classes = useHomeStyle();
+  const classes = useHomeStyle()(theme);
 
   const match = useMediaQuery('(max-width:956px)');
   const justifyContent = !match ? classes.justifyCenter : '';
@@ -50,7 +50,7 @@ function HomeBody({ langs }) {
 }
 
 export function HomePageTitle() {
-  const classes = useHomeStyle();
+  const classes = useHomeStyle()(theme);
   return (
     <header>
       <h1 className={classes.title}>
@@ -62,7 +62,7 @@ export function HomePageTitle() {
 }
 
 function Translation({ langs }) {
-  const classes = useHomeStyle(theme);
+  const classes = useHomeStyle()(theme);
 
   return (
     <section className={classes.translation}>
@@ -79,37 +79,45 @@ function Translation({ langs }) {
             />
           </IncludeIf>
           <LanguageSelection data={data} />
-          <InputTextArea
-            className={`${classes.textAreaField} ${
-              data.id === 'tar' ? classes.tr_output : ''
-            }`}
-            readOnly={data.id !== 'src'}
-          />
+          <InputTextArea readOnly={data.id === 'tar'} />
         </div>
       ))}
     </section>
   );
 }
 
-function InputTextArea({ className, readOnly = false }) {
+function InputTextArea({ readOnly = false }) {
   const inputArea = !readOnly ? 'input-textarea' : '';
+
+  const classes = useHomeStyle()(theme);
+
+  let classNames = `${classes.textAreaField} ${inputArea}`;
+  let placeholder = 'Type to translate';
+
+  if (readOnly) {
+    classNames += ` ${classes.tr_output}`;
+    placeholder = null;
+  }
+
   React.useEffect(() => {
     if (!readOnly) {
       document.querySelector(`.${inputArea}`).focus();
     }
   }, [readOnly, inputArea]);
+
   return (
     <textarea
-      className={`${className} ${inputArea}`}
+      className={classNames}
       rows='1'
       readOnly={readOnly}
-      placeholder={!readOnly ? 'Type to translate' : null}
+      placeholder={placeholder}
       aria-label='Source text'
     />
   );
 }
+
 function LanguageSelection({ data, name }) {
-  const classes = useHomeStyle();
+  const classes = useHomeStyle()(theme);
   const [lang, setLang] = React.useState(0);
   const handleChange = (events) => {
     setLang(events.target.value);
@@ -126,15 +134,15 @@ function LanguageSelection({ data, name }) {
     },
     getContentAnchorEl: null,
   };
-  const icon = useIconStyle();
+  const icon = useIconStyle()();
   const iconComponent = (props) => {
     return (
       <ExpandMoreIcon className={`${props.className} ${icon.expandMore}`} />
     );
   };
   return (
-    <FormControl classes={{ root: classes.root_formControl }}>
-      <FormLabel classes={{ root: classes.root_formLabel }}>
+    <FormControl className={classes.root_formControl}>
+      <FormLabel className={classes.root_formLabel}>
         Translate {data.id === 'src' ? 'From' : 'Into'}
       </FormLabel>
       <Select
